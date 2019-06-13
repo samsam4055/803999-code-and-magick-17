@@ -10,6 +10,7 @@
   var setupUserName = setup.querySelector('.setup-user-name');
   var setupWizardCoat = setup.querySelector('.wizard-coat');
   var setupWizardEyes = setup.querySelector('.wizard-eyes');
+  var setupFireball = setup.querySelector('.setup-fireball-wrap');
   var coatColors = [
     'rgb(101, 137, 164)',
     'rgb(241, 43, 107)',
@@ -19,7 +20,12 @@
     'rgb(0, 0, 0)'
     ];
   var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
+  var fireballColors = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
   var setupUserNameFocus = false;
+
+  var onSetupFireballClick = function (evt) {
+    setupFireball.style.background = fireballColors[getRandomInt(fireballColors.length)];
+  };
 
   var onSetupWizardCoatClick = function (evt) {
     setupWizardCoat.style = 'fill: ' + coatColors[getRandomInt(coatColors.length)];
@@ -50,6 +56,7 @@
     setupUserName.addEventListener('focusout', onSetupUserNameFocusout);
     setupWizardCoat.addEventListener('click', onSetupWizardCoatClick);
     setupWizardEyes.addEventListener('click', onSetupWizardEyesClick);
+    setupFireball.addEventListener('click', onSetupFireballClick);
   };
 
   var closePopup = function () {
@@ -59,6 +66,7 @@
     setupUserName.removeEventListener('focusout', onSetupUserNameFocusout);
     setupWizardCoat.removeEventListener('click', onSetupWizardCoatClick);
     setupWizardEyes.removeEventListener('click', onSetupWizardEyesClick);
+    setupFireball.removeEventListener('click', onSetupFireballClick);
   };
 
   setupOpen.addEventListener('click', function () {
