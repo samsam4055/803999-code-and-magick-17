@@ -8,16 +8,35 @@
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
   var setupUserName = setup.querySelector('.setup-user-name');
+  var setupWizardCoat = setup.querySelector('.wizard-coat');
+  var setupWizardEyes = setup.querySelector('.wizard-eyes');
+  var coatColors = [
+    'rgb(101, 137, 164)',
+    'rgb(241, 43, 107)',
+    'rgb(146, 100, 161)',
+    'rgb(56, 159, 117)',
+    'rgb(215, 210, 55)',
+    'rgb(0, 0, 0)'
+    ];
+  var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
   var setupUserNameFocus = false;
-  
+
+  var onSetupWizardCoatClick = function (evt) {
+    setupWizardCoat.style = 'fill: ' + coatColors[getRandomInt(coatColors.length)];
+  };
+
+  var onSetupWizardEyesClick = function (evt) {
+    setupWizardEyes.style = 'fill: ' + eyesColors[getRandomInt(eyesColors.length)];
+  };
+
   var onSetupUserNameFocus = function (evt) {
     setupUserNameFocus = true;
   };
-  
+
   var onSetupUserNameFocusout = function (evt) {
     setupUserNameFocus = false;
   };
-  
+
   var onPopupEscPress = function (evt) {
     if (!setupUserNameFocus && evt.keyCode === ESC_KEYCODE) {
       closePopup();
@@ -29,6 +48,8 @@
     document.addEventListener('keydown', onPopupEscPress);
     setupUserName.addEventListener('focus', onSetupUserNameFocus);
     setupUserName.addEventListener('focusout', onSetupUserNameFocusout);
+    setupWizardCoat.addEventListener('click', onSetupWizardCoatClick);
+    setupWizardEyes.addEventListener('click', onSetupWizardEyesClick);
   };
 
   var closePopup = function () {
@@ -36,6 +57,8 @@
     document.removeEventListener('keydown', onPopupEscPress);
     setupUserName.removeEventListener('focus', onSetupUserNameFocus);
     setupUserName.removeEventListener('focusout', onSetupUserNameFocusout);
+    setupWizardCoat.removeEventListener('click', onSetupWizardCoatClick);
+    setupWizardEyes.removeEventListener('click', onSetupWizardEyesClick);
   };
 
   setupOpen.addEventListener('click', function () {
@@ -65,16 +88,6 @@
   var generateHeroes = function () {
     var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
     var surnames = ['да Мария', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-    var coatColors = [
-      'rgb(101, 137, 164)',
-      'rgb(241, 43, 107)',
-      'rgb(146, 100, 161)',
-      'rgb(56, 159, 117)',
-      'rgb(215, 210, 55)',
-      'rgb(0, 0, 0)'
-    ];
-
-    var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
 
     var heroes = [];
 
