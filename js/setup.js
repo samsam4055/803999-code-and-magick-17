@@ -7,9 +7,19 @@
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
-
+  var setupUserName = setup.querySelector('.setup-user-name');
+  var setupUserNameFocus = false;
+  
+  var onSetupUserNameFocus = function (evt) {
+    setupUserNameFocus = true;
+  };
+  
+  var onSetupUserNameFocusout = function (evt) {
+    setupUserNameFocus = false;
+  };
+  
   var onPopupEscPress = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
+    if (!setupUserNameFocus && evt.keyCode === ESC_KEYCODE) {
       closePopup();
     }
   };
@@ -17,11 +27,15 @@
   var openPopup = function () {
     setup.classList.remove('hidden');
     document.addEventListener('keydown', onPopupEscPress);
+    setupUserName.addEventListener('focus', onSetupUserNameFocus);
+    setupUserName.addEventListener('focusout', onSetupUserNameFocusout);
   };
 
   var closePopup = function () {
     setup.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress);
+    setupUserName.removeEventListener('focus', onSetupUserNameFocus);
+    setupUserName.removeEventListener('focusout', onSetupUserNameFocusout);
   };
 
   setupOpen.addEventListener('click', function () {
