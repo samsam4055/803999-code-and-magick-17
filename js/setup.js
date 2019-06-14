@@ -23,23 +23,23 @@
   var fireballColors = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
   var setupUserNameFocus = false;
 
-  var onSetupFireballClick = function (evt) {
+  var onSetupFireballClick = function () {
     setupFireball.style.background = fireballColors[getRandomInt(fireballColors.length)];
   };
 
-  var onSetupWizardCoatClick = function (evt) {
+  var onSetupWizardCoatClick = function () {
     setupWizardCoat.style = 'fill: ' + coatColors[getRandomInt(coatColors.length)];
   };
 
-  var onSetupWizardEyesClick = function (evt) {
+  var onSetupWizardEyesClick = function () {
     setupWizardEyes.style = 'fill: ' + eyesColors[getRandomInt(eyesColors.length)];
   };
 
-  var onSetupUserNameFocus = function (evt) {
+  var onSetupUserNameFocus = function () {
     setupUserNameFocus = true;
   };
 
-  var onSetupUserNameFocusout = function (evt) {
+  var onSetupUserNameFocusout = function () {
     setupUserNameFocus = false;
   };
 
