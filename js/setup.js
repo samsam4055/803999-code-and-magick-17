@@ -18,7 +18,7 @@
     'rgb(56, 159, 117)',
     'rgb(215, 210, 55)',
     'rgb(0, 0, 0)'
-    ];
+  ];
   var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
   var fireballColors = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
   var setupUserNameFocus = false;
