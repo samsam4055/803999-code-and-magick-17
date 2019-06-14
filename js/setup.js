@@ -1,10 +1,93 @@
 'use strict';
 
 (function () {
+  var ESC_KEYCODE = 27;
+  var ENTER_KEYCODE = 13;
 
-  var pageSetup = document.querySelector('.setup');
+  var setup = document.querySelector('.setup');
+  var setupOpen = document.querySelector('.setup-open');
+  var setupClose = setup.querySelector('.setup-close');
+  var setupUserName = setup.querySelector('.setup-user-name');
+  var setupWizardCoat = setup.querySelector('.wizard-coat');
+  var setupWizardEyes = setup.querySelector('.wizard-eyes');
+  var setupFireball = setup.querySelector('.setup-fireball-wrap');
+  var coatColors = [
+    'rgb(101, 137, 164)',
+    'rgb(241, 43, 107)',
+    'rgb(146, 100, 161)',
+    'rgb(56, 159, 117)',
+    'rgb(215, 210, 55)',
+    'rgb(0, 0, 0)'
+  ];
+  var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
+  var fireballColors = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+  var setupUserNameFocus = false;
 
-  pageSetup.classList.remove('hidden');
+  var onSetupFireballClick = function () {
+    setupFireball.style.background = fireballColors[getRandomInt(fireballColors.length)];
+  };
+
+  var onSetupWizardCoatClick = function () {
+    setupWizardCoat.style = 'fill: ' + coatColors[getRandomInt(coatColors.length)];
+  };
+
+  var onSetupWizardEyesClick = function () {
+    setupWizardEyes.style = 'fill: ' + eyesColors[getRandomInt(eyesColors.length)];
+  };
+
+  var onSetupUserNameFocus = function () {
+    setupUserNameFocus = true;
+  };
+
+  var onSetupUserNameFocusout = function () {
+    setupUserNameFocus = false;
+  };
+
+  var onPopupEscPress = function (evt) {
+    if (!setupUserNameFocus && evt.keyCode === ESC_KEYCODE) {
+      closePopup();
+    }
+  };
+
+  var openPopup = function () {
+    setup.classList.remove('hidden');
+    document.addEventListener('keydown', onPopupEscPress);
+    setupUserName.addEventListener('focus', onSetupUserNameFocus);
+    setupUserName.addEventListener('focusout', onSetupUserNameFocusout);
+    setupWizardCoat.addEventListener('click', onSetupWizardCoatClick);
+    setupWizardEyes.addEventListener('click', onSetupWizardEyesClick);
+    setupFireball.addEventListener('click', onSetupFireballClick);
+  };
+
+  var closePopup = function () {
+    setup.classList.add('hidden');
+    document.removeEventListener('keydown', onPopupEscPress);
+    setupUserName.removeEventListener('focus', onSetupUserNameFocus);
+    setupUserName.removeEventListener('focusout', onSetupUserNameFocusout);
+    setupWizardCoat.removeEventListener('click', onSetupWizardCoatClick);
+    setupWizardEyes.removeEventListener('click', onSetupWizardEyesClick);
+    setupFireball.removeEventListener('click', onSetupFireballClick);
+  };
+
+  setupOpen.addEventListener('click', function () {
+    openPopup();
+  });
+
+  setupOpen.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      openPopup();
+    }
+  });
+
+  setupClose.addEventListener('click', function () {
+    closePopup();
+  });
+
+  setupClose.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      closePopup();
+    }
+  });
 
   var getRandomInt = function (max) {
     return Math.floor(Math.random() * max);
@@ -13,16 +96,6 @@
   var generateHeroes = function () {
     var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
     var surnames = ['да Мария', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-    var coatColors = [
-      'rgb(101, 137, 164)',
-      'rgb(241, 43, 107)',
-      'rgb(146, 100, 161)',
-      'rgb(56, 159, 117)',
-      'rgb(215, 210, 55)',
-      'rgb(0, 0, 0)'
-    ];
-
-    var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
 
     var heroes = [];
 
