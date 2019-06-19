@@ -3,6 +3,8 @@
 (function () {
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
+  var START_SETUP_TOP = '80px';
+  var START_SETUP_LEFT = '50%';
 
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
@@ -67,6 +69,8 @@
     setupWizardCoat.removeEventListener('click', onSetupWizardCoatClick);
     setupWizardEyes.removeEventListener('click', onSetupWizardEyesClick);
     setupFireball.removeEventListener('click', onSetupFireballClick);
+    setup.style.top = START_SETUP_TOP;
+    setup.style.left = START_SETUP_LEFT;
   };
 
   setupOpen.addEventListener('click', function () {

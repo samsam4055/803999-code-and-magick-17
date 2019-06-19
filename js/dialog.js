@@ -53,5 +53,4 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-
 })();
