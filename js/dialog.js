@@ -5,12 +5,12 @@
   var dialogHandler = setupDialogElement.querySelector('.upload');
   var artifactHandler = setupDialogElement.querySelector('.setup-artifacts-cell > img');
 
-  dialogHandler.addEventListener('mousedown', function (evt) {
-    evt.preventDefault();
+  dialogHandler.addEventListener('mousedown', function (evtDialog) {
+    evtDialog.preventDefault();
 
     var startCoords = {
-      x: evt.clientX,
-      y: evt.clientY
+      x: evtDialog.clientX,
+      y: evtDialog.clientY
     };
 
     var dragged = false;
@@ -41,9 +41,9 @@
       document.removeEventListener('mouseup', onMouseUp);
 
       if (dragged) {
-        var onClickPreventDefault = function (evt) {
-          evt.preventDefault();
-          dialogHandler.removeEventListener('click', onClickPreventDefault)
+        var onClickPreventDefault = function (evtDragged) {
+          evtDragged.preventDefault();
+          dialogHandler.removeEventListener('click', onClickPreventDefault);
         };
         dialogHandler.addEventListener('click', onClickPreventDefault);
       }
@@ -62,11 +62,9 @@
       y: evt.clientY
     };
 
-    var dragged = false;
-
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
-      dragged = true;
+
       artifactHandler.style.position = 'absolute';
 
       var shift = {
@@ -99,7 +97,7 @@
       } else {
         artifactHandler.style.position = 'inherit';
         document.querySelector('.setup-artifacts-shop > .setup-artifacts-cell').appendChild(artifactHandler);
-        artifactHandler.style.top = '109px';  // не могу понять, откуда взять эти значения из DOM, что-бы не число указывать 
+        artifactHandler.style.top = '109px';
         artifactHandler.style.left = '196px';
       }
     };
