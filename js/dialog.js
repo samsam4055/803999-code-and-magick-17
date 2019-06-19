@@ -88,7 +88,7 @@
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
 
-      if (upEvt.explicitOriginalTarget.className === 'setup-artifacts-cell') {
+      if (upEvt.target.className === 'setup-artifacts-cell') {
         document.querySelector('.setup-artifacts-cell').removeChild(artifactHandler);
         document.querySelector('.setup-artifacts > .setup-artifacts-cell').appendChild(artifactHandler);
         artifactHandler.style.position = 'inherit';
