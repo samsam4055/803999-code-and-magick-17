@@ -129,7 +129,6 @@
   };
 
   var fragment = document.createDocumentFragment();
-
   var heroes = generateHeroes();
 
   for (var j = 0; j < heroes.length; j++) {
