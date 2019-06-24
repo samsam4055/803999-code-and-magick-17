@@ -97,23 +97,6 @@
     return Math.floor(Math.random() * max);
   };
 
-  var generateHeroes = function () {
-    var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-    var surnames = ['да Мария', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-
-    var heroes = [];
-
-    for (var i = 0; i < 4; i++) {
-      heroes.push({
-        name: names[getRandomInt(names.length)] + ' ' + surnames[getRandomInt(surnames.length)],
-        coatColor: coatColors[getRandomInt(coatColors.length)],
-        eyesColor: eyesColors[getRandomInt(eyesColors.length)]
-      });
-    }
-
-    return heroes;
-  };
-
   var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
@@ -121,18 +104,18 @@
   var renderWizard = function (wizard) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
 
-    wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
-    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
+    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
     wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
 
     return wizardElement;
   };
 
+  var successHandler = function (wizards){
   var fragment = document.createDocumentFragment();
-  var heroes = generateHeroes();
 
-  for (var j = 0; j < heroes.length; j++) {
-    fragment.appendChild(renderWizard(heroes[j]));
+  for (var j = 0; j < 4; j++) {
+    fragment.appendChild(renderWizard(wizards[getRandomInt(wizards.length - 1)]));
   }
 
   var setupSimilarList = document.querySelector('.setup-similar-list');
@@ -141,5 +124,19 @@
   setupSimilarList.appendChild(fragment);
 
   setupSimilarDialog.classList.remove('hidden');
+  };
 
+  var errorHandler = function (errorMessage) {
+    var node = document.createElement('div');
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: yellow; top: 200px; padding: 45px 0px; color: red;';
+    node.style.width = '500px';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
+  };
+
+  window.backend.load(successHandler, errorHandler);
 })();
