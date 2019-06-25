@@ -111,19 +111,19 @@
     return wizardElement;
   };
 
-  var successHandler = function (wizards){
-  var fragment = document.createDocumentFragment();
+  var successHandler = function (wizards) {
+    var fragment = document.createDocumentFragment();
 
-  for (var j = 0; j < 4; j++) {
-    fragment.appendChild(renderWizard(wizards[getRandomInt(wizards.length - 1)]));
-  }
+    for (var j = 0; j < 4; j++) {
+      fragment.appendChild(renderWizard(wizards[getRandomInt(wizards.length - 1)]));
+    }
 
-  var setupSimilarList = document.querySelector('.setup-similar-list');
-  var setupSimilarDialog = document.querySelector('.setup-similar');
+    var setupSimilarList = document.querySelector('.setup-similar-list');
+    var setupSimilarDialog = document.querySelector('.setup-similar');
 
-  setupSimilarList.appendChild(fragment);
+    setupSimilarList.appendChild(fragment);
 
-  setupSimilarDialog.classList.remove('hidden');
+    setupSimilarDialog.classList.remove('hidden');
   };
 
   var errorHandler = function (errorMessage) {
@@ -144,11 +144,11 @@
 
   similarForm.addEventListener('submit', function (evt) {
 
-    var successHandler = function () {
+    var successHandlerForm = function () {
       setup.classList.toggle('hidden');
     };
 
-    window.backend.upload(new FormData(similarForm), successHandler, errorHandler);
+    window.backend.upload(new FormData(similarForm), successHandlerForm, errorHandler);
 
     evt.preventDefault();
   });
