@@ -139,4 +139,17 @@
   };
 
   window.backend.load(successHandler, errorHandler);
+
+  var similarForm = document.querySelector('.setup-wizard-form');
+
+  similarForm.addEventListener('submit', function (evt) {
+
+    var successHandler = function () {
+      setup.classList.toggle('hidden');
+    };
+
+    window.backend.upload(new FormData(similarForm), successHandler, errorHandler);
+
+    evt.preventDefault();
+  });
 })();
